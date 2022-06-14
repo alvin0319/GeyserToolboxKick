@@ -1,0 +1,8 @@
+name: GeyserToolboxKick
+author: alvin0319
+main: dev.minjae.geysertoolboxkick.Loader
+version: 1.0.0
+api-version: 1.13
+
+depend:
+  - Geyser-Spigot
