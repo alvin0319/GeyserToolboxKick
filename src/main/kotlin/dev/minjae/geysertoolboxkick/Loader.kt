@@ -6,6 +6,7 @@ import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.plugin.java.JavaPlugin
+import org.geysermc.floodgate.util.DeviceOs
 import org.geysermc.geyser.GeyserImpl
 
 class Loader : JavaPlugin(), Listener {
@@ -19,7 +20,12 @@ class Loader : JavaPlugin(), Listener {
     fun onPlayerJoin(event: PlayerJoinEvent) {
         val player = event.player
         if (GeyserImpl.getInstance().sessionManager.sessions[player.uniqueId] != null) {
-            val deviceModel = GeyserImpl.getInstance().sessionManager.sessions[player.uniqueId]!!.clientData.deviceModel
+            val session = GeyserImpl.getInstance().sessionManager.sessions[player.uniqueId]!!
+            val deviceOS = session.clientData.deviceOs
+            if (deviceOS != DeviceOs.GOOGLE) {
+                return
+            }
+            val deviceModel = session.clientData.deviceModel
             deviceModel?.let {
                 val name = it.split(" ")
                 if (name.isEmpty()) {
