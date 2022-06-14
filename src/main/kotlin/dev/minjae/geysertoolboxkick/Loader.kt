@@ -18,8 +18,6 @@ class Loader : JavaPlugin(), Listener {
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = false)
     fun onPlayerJoin(event: PlayerJoinEvent) {
         val player = event.player
-        println(GeyserImpl.getInstance().sessionManager.sessions.keys)
-        println(GeyserImpl.getInstance().sessionManager.sessions[player.uniqueId] != null)
         if (GeyserImpl.getInstance().sessionManager.sessions[player.uniqueId] != null) {
             val deviceModel = GeyserImpl.getInstance().sessionManager.sessions[player.uniqueId]!!.clientData.deviceModel
             deviceModel?.let {
